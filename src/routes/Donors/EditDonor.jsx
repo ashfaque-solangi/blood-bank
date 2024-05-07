@@ -7,12 +7,16 @@ import FormDropDown from "../../components/Forms/FormDropDown";
 import BLOOD_GROUPS from "../../_mock/blood-groups.json";
 import FormTelNumberInput from "../../components/Forms/FormTelNumberInput";
 import FormTextArea from "../../components/Forms/FormTextArea";
+import { useParams } from "react-router-dom";
 
-function AddDonor() {
+function EditDonor() {
+  const params = useParams();
+  console.log(params);
+
   return (
     <Box>
       <Typography variant="h6" mb={2}>
-        Add New Donor
+        Edit Donor {params.id}
       </Typography>
       <form>
         <FormContainer title={"Donor Name"}>
@@ -31,14 +35,11 @@ function AddDonor() {
           <FormTextArea name={"description"} />
         </FormContainer>
         <Box gap={1} display={"flex"} justifyContent={"center"} mb={2}>
-          <Button variant="contained">Add Donor</Button>
-          <Button variant="contained" color="error">
-            Reset
-          </Button>
+          <Button variant="contained">Update Donor</Button>
         </Box>
       </form>
     </Box>
   );
 }
 
-export default AddDonor;
+export default EditDonor;

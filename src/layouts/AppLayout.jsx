@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import { useWindowWidth } from "@react-hook/window-size";
-
-import Routes from "../routes";
+import { Outlet } from "react-router";
 
 function AppLayout() {
   const onlyWidth = useWindowWidth();
@@ -32,7 +31,7 @@ function AppLayout() {
         <Grid item xs={12} md={9.5}>
           <Box px={2}>
             <Paper sx={{ p: 2 }}>
-              <Routes />
+              <Outlet />
             </Paper>
           </Box>
         </Grid>

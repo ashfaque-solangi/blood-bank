@@ -1,6 +1,6 @@
 import React from "react";
 import GridTable from "../../components/GridTable/GridTable";
-import { Box, Button, Paper } from "@mui/material";
+import { Box, Button, IconButton, Paper } from "@mui/material";
 import { RiEditFill } from "react-icons/ri";
 import { MdVisibility } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -35,10 +35,22 @@ const columns = [
     field: "action",
     headerName: "Action",
     flex: 1,
-    renderCell: (params) => (
-      <Box>
-        <RiEditFill />
-        <MdVisibility />
+    renderCell: ({ row }) => (
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        gap={1}
+        height={"100%"}
+      >
+        {/* <RiEditFill /> */}
+        <IconButton LinkComponent={Link} to={`/donors/edit/${row.id}`}>
+          <RiEditFill />
+        </IconButton>
+        <IconButton LinkComponent={Link} to={`/donors/view/${row.id}`}>
+          <MdVisibility />
+        </IconButton>
+        {/* <MdVisibility /> */}
       </Box>
     ),
   },
