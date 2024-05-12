@@ -2,10 +2,8 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 import React from "react";
 import FormEmailInput from "../../components/Forms/FormEmailInput";
 import FormPasswordInput from "../../components/Forms/FormPasswordInput";
-import { Link } from "react-router-dom";
-import FormTextInput from "../../components/Forms/FormTextInput";
 
-function Register() {
+function ForgetPassword() {
   return (
     <Paper
       sx={{
@@ -21,19 +19,18 @@ function Register() {
       <Typography variant="h4" fontWeight={600}>
         ABC Blood Bank
       </Typography>
+      <Typography variant="h6" fontWeight={300}>
+        Reset Your Password Here !...
+      </Typography>
       <Box display={"flex"} flexDirection={"column"} gap={1} width="80%">
-        <FormTextInput name="name" label="Enter Name" />
         <FormEmailInput name="email" label="Enter Email" />
         <FormPasswordInput name="password" label="Enter Password" />
-        <Button variant="contained">Login</Button>
+        <FormPasswordInput name="confirm-password" label="Confirm Password" />
+        <Button variant="contained">Update Password</Button>
       </Box>
-      <Box alignContent={"center"} alignItems={"center"}>
-        <Typography component={Link} to="/">
-          Have an Account Please Login Here !...
-        </Typography>
-      </Box>
+      <Box alignContent={"center"} alignItems={"center"}></Box>
     </Paper>
   );
 }
 
-export default Register;
+export default ForgetPassword;

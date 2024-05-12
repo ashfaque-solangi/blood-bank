@@ -1,18 +1,30 @@
 import { useRoutes } from "react-router";
-import Bloods from "./Bloods";
+import {
+  AddBloodGroup,
+  EditBloodGroup,
+  GridBloodGroup,
+  ViewBloodGroup,
+} from "./BloodGroup";
 import Dashboard from "./Dashboard";
 import { AddDonor, GridDonor, ViewDonor } from "./Donors";
-import Patients from "./Patients";
+import { AddPatient, EditPatient, GridPatient, ViewPatient } from "./Patients";
 import EditDonor from "./Donors/EditDonor";
-import Login from "./Auth/Login";
+
 import AuthLayout from "../layouts/AuthLayout";
 import AppLayout from "../layouts/AppLayout";
 import Register from "./Auth/Register";
+import Login from "./Auth/Login";
+import ForgetPassword from "./Auth/ForgetPassword";
+import { GridCrossMatch } from "./CrossMatch";
+import {
+  AddBloodExchangeRequest,
+  GridBloodExchangeRequest,
+} from "./ExchangeBlood";
 
 const Routes = () => {
   return useRoutes([
     {
-      path: "/login",
+      path: "/",
       element: (
         <AuthLayout>
           <Login />
@@ -24,6 +36,14 @@ const Routes = () => {
       element: (
         <AuthLayout>
           <Register />
+        </AuthLayout>
+      ),
+    },
+    {
+      path: "/forget-password",
+      element: (
+        <AuthLayout>
+          <ForgetPassword />
         </AuthLayout>
       ),
     },
@@ -65,17 +85,65 @@ const Routes = () => {
       children: [
         {
           path: "",
-          element: <Patients />,
+          element: <GridPatient />,
+        },
+        {
+          path: "add",
+          element: <AddPatient />,
+        },
+        {
+          path: "edit/:id",
+          element: <EditPatient />,
+        },
+        {
+          path: "view/:id",
+          element: <ViewPatient />,
         },
       ],
     },
     {
-      path: "/bloods",
+      path: "/blood-groups",
       element: <AppLayout />,
       children: [
         {
           path: "",
-          element: <Bloods />,
+          element: <GridBloodGroup />,
+        },
+        {
+          path: "add",
+          element: <AddBloodGroup />,
+        },
+        {
+          path: "edit/:id",
+          element: <EditBloodGroup />,
+        },
+        {
+          path: "view/:id",
+          element: <ViewBloodGroup />,
+        },
+      ],
+    },
+    {
+      path: "/cross-match",
+      element: <AppLayout />,
+      children: [
+        {
+          path: "",
+          element: <GridCrossMatch />,
+        },
+      ],
+    },
+    {
+      path: "/blood-exchange",
+      element: <AppLayout />,
+      children: [
+        {
+          path: "",
+          element: <GridBloodExchangeRequest />,
+        },
+        {
+          path: "add",
+          element: <AddBloodExchangeRequest />,
         },
       ],
     },

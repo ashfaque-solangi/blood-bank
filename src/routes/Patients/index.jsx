@@ -1,7 +1,6 @@
-import React from "react";
+import GridPatient from "./GridPatient";
+import AddPatient from "./AddPatient";
+import EditPatient from "./EditPatient";
+import ViewPatient from "./ViewPatient";
 
-const Patients = () => {
-  return <div>Patients</div>;
-};
-
-export default Patients;
+export { GridPatient, AddPatient, EditPatient, ViewPatient };

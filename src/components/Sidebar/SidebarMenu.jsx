@@ -33,7 +33,19 @@ const menuLinks = [
   {
     id: "bloods",
     title: "Bloods",
-    href: "/bloods",
+    href: "/blood-groups",
+    icon: <MdBloodtype fontSize={ICON_SIZE} />,
+  },
+  {
+    id: "cross-match",
+    title: "Cross Match",
+    href: "/cross-match",
+    icon: <MdBloodtype fontSize={ICON_SIZE} />,
+  },
+  {
+    id: "blood-exchange",
+    title: "Blood Exchange",
+    href: "/blood-exchange",
     icon: <MdBloodtype fontSize={ICON_SIZE} />,
   },
 ];
