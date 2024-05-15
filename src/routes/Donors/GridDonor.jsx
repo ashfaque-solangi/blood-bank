@@ -1,34 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GridTable from "../../components/GridTable/GridTable";
 import { Box, Button, IconButton, Paper } from "@mui/material";
 import { RiEditFill } from "react-icons/ri";
 import { MdVisibility } from "react-icons/md";
 import { Link } from "react-router-dom";
 
+import { getRequest } from "../../utils/server-request";
+
 const columns = [
   {
-    field: "id",
+    field: "donor_id",
     headerName: "ID",
     flex: 1,
   },
   {
-    field: "donorName",
+    field: "donor_name",
     headerName: "Donor Name",
     flex: 1,
   },
   {
-    field: "contact",
+    field: "donor_contact",
     headerName: "Contact",
     flex: 1,
   },
   {
-    field: "email",
+    field: "donor_email",
     headerName: "Email",
     flex: 1,
   },
   {
-    field: "bloodType",
+    field: "donor_blood_type",
     headerName: "Blood Type",
+    flex: 1,
+  },
+  {
+    field: "donor_blood_qty",
+    headerName: "Blood Qty",
     flex: 1,
   },
   {
@@ -43,51 +50,65 @@ const columns = [
         gap={1}
         height={"100%"}
       >
-        {/* <RiEditFill /> */}
-        <IconButton LinkComponent={Link} to={`/donors/edit/${row.id}`}>
+        <IconButton LinkComponent={Link} to={`/donors/edit/${row.donor_id}`}>
           <RiEditFill />
         </IconButton>
-        <IconButton LinkComponent={Link} to={`/donors/view/${row.id}`}>
+        <IconButton LinkComponent={Link} to={`/donors/view/${row.donor_id}`}>
           <MdVisibility />
         </IconButton>
-        {/* <MdVisibility /> */}
       </Box>
     ),
   },
 ];
 
-const rows = [
-  {
-    id: 1,
-    donorName: "Ashfaque",
-    contact: "03003437182",
-    email: "aliguddu855@gmail.com",
-    bloodType: "O+ve",
-  },
-  {
-    id: 2,
-    donorName: "Ashfaque",
-    contact: "03003437182",
-    email: "aliguddu855@gmail.com",
-    bloodType: "O+ve",
-  },
-  {
-    id: 3,
-    donorName: "Ashfaque",
-    contact: "03003437182",
-    email: "aliguddu855@gmail.com",
-    bloodType: "O+ve",
-  },
-  {
-    id: 4,
-    donorName: "Ashfaque",
-    contact: "03003437182",
-    email: "aliguddu855@gmail.com",
-    bloodType: "O+ve",
-  },
-];
+// const rows = [
+//   {
+//     id: 1,
+//     donorName: "Ashfaque",
+//     contact: "03003437182",
+//     email: "aliguddu855@gmail.com",
+//     bloodType: "O+ve",
+//     bloodQty: "500 ml",
+//   },
+//   {
+//     id: 2,
+//     donorName: "Ashfaque",
+//     contact: "03003437182",
+//     email: "aliguddu855@gmail.com",
+//     bloodType: "O+ve",
+//     bloodQty: "500 ml",
+//   },
+//   {
+//     id: 3,
+//     donorName: "Ashfaque",
+//     contact: "03003437182",
+//     email: "aliguddu855@gmail.com",
+//     bloodType: "O+ve",
+//     bloodQty: "500 ml",
+//   },
+//   {
+//     id: 4,
+//     donorName: "Ashfaque",
+//     contact: "03003437182",
+//     email: "aliguddu855@gmail.com",
+//     bloodType: "O+ve",
+//     bloodQty: "500 ml",
+//   },
+// ];
 
 const GridDonor = () => {
+  const [donors, setDonors] = useState([]);
+
+  const fetchDonors = async () => {
+    await getRequest("donors", (res) => {
+      setDonors(res);
+    });
+  };
+
+  useEffect(() => {
+    fetchDonors();
+  }, []);
+
   return (
     <>
       <Box display={"flex"} justifyContent={"flex-end"} mb={2}>
@@ -95,7 +116,7 @@ const GridDonor = () => {
           Add New Donor
         </Button>
       </Box>
-      <GridTable columns={columns} rows={rows} />
+      <GridTable id="donor_id" columns={columns} rows={donors} />
     </>
   );
 };

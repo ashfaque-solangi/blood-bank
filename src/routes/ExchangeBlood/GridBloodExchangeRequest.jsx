@@ -12,18 +12,43 @@ const columns = [
     flex: 1,
   },
   {
-    field: "donors",
-    headerName: "Donors",
+    field: "donor",
+    headerName: "Donor Name",
     flex: 1,
   },
   {
-    field: "patients",
-    headerName: "Patients",
+    field: "blood_group",
+    headerName: "Blood Group",
     flex: 1,
   },
   {
-    field: "cross_match_code",
-    headerName: "Cross Match Code",
+    field: "blood_qty",
+    headerName: "Blood Qty",
+    flex: 1,
+  },
+  {
+    field: "blood_exchange",
+    headerName: "Blood Exchange Group",
+    flex: 1,
+  },
+  {
+    field: "blood_exchange_qty",
+    headerName: "Blood Exchange Qty",
+    flex: 1,
+  },
+  {
+    field: "contact_number",
+    headerName: "Contact Number",
+    flex: 1,
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    flex: 1,
+  },
+  {
+    field: "description",
+    headerName: "Description",
     flex: 1,
   },
   {
@@ -52,9 +77,14 @@ const columns = [
 const rows = [
   {
     id: 1,
-    donors: "Ashfaque",
-    patients: "Ali",
-    cross_match_code: "CMC-001",
+    donor: "Ashfaque Ahmed",
+    blood_group: "O+ve",
+    blood_qty: "500 ml",
+    blood_exchange: "A+ve",
+    blood_exchange_qty: "500 ml",
+    contact_number: "03003437182",
+    email: "aliguddu855@gmail.com",
+    description: "hello",
   },
 ];
 

@@ -22,11 +22,17 @@ function AddBloodExchangeRequest() {
         <FormContainer title={"Blood Group"}>
           <FormDropDown name={"bloodGroup"} options={BLOOD_GROUPS} />
         </FormContainer>
-        <FormContainer title={"Blood in Exchange"}>
+        <FormContainer title={"Blood Qty"}>
+          <FormNumberInput name={"bloodQty"} placeholder="Enter Blood Qty" />
+        </FormContainer>
+        <FormContainer title={"Blood Group in Exchange"}>
           <FormDropDown name={"bloodExchange"} options={BLOOD_GROUPS} />
         </FormContainer>
-        <FormContainer title={"Qty"}>
-          <FormNumberInput name={"bloodQty"} placeholder="Enter Blood Qty" />
+        <FormContainer title={"Blood Exchange Qty"}>
+          <FormNumberInput
+            name={"bloodExchangeQty"}
+            placeholder="Enter Blood Qty"
+          />
         </FormContainer>
         <FormContainer title={"Contact Number"}>
           <FormTelNumberInput name={"contactNumber"} />

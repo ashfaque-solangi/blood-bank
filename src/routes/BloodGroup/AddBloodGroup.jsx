@@ -5,6 +5,7 @@ import FormTextInput from "../../components/Forms/FormTextInput";
 import FormTextArea from "../../components/Forms/FormTextArea";
 import FormDropDown from "../../components/Forms/FormDropDown";
 import BLOOD_GROUPS from "../../_mock/blood-groups.json";
+import FormNumberInput from "../../components/Forms/FormNumberInput";
 
 function AddBloodGroup() {
   return (
@@ -21,6 +22,9 @@ function AddBloodGroup() {
         </FormContainer>
         <FormContainer title={"Blood Donors"}>
           <FormDropDown name={"bloodDonors"} options={BLOOD_GROUPS} />
+        </FormContainer>
+        <FormContainer title={"Qty"}>
+          <FormNumberInput name={"qty"} />
         </FormContainer>
         <Box gap={1} display={"flex"} justifyContent={"center"} mb={2}>
           <Button variant="contained">Add Group</Button>

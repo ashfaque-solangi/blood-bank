@@ -7,6 +7,7 @@ import FormDropDown from "../../components/Forms/FormDropDown";
 import BLOOD_GROUPS from "../../_mock/blood-groups.json";
 import FormTelNumberInput from "../../components/Forms/FormTelNumberInput";
 import FormTextArea from "../../components/Forms/FormTextArea";
+import FormNumberInput from "../../components/Forms/FormNumberInput";
 
 function AddPatient() {
   return (
@@ -23,6 +24,9 @@ function AddPatient() {
         </FormContainer>
         <FormContainer title={"Blood Group"}>
           <FormDropDown name={"bloodGroup"} options={BLOOD_GROUPS} />
+        </FormContainer>
+        <FormContainer title={"Qty"}>
+          <FormNumberInput name={"qty"} />
         </FormContainer>
         <FormContainer title={"Contact Number"}>
           <FormTelNumberInput name={"contactNumber"} />

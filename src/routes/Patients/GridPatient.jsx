@@ -32,6 +32,11 @@ const columns = [
     flex: 1,
   },
   {
+    field: "bloodQty",
+    headerName: "Blood Qty",
+    flex: 1,
+  },
+  {
     field: "action",
     headerName: "Action",
     flex: 1,
@@ -63,6 +68,7 @@ const rows = [
     contact: "03003437182",
     email: "aliguddu855@gmail.com",
     bloodType: "O+ve",
+    bloodQty: "500 ml",
   },
   {
     id: 2,
@@ -70,6 +76,7 @@ const rows = [
     contact: "03003437182",
     email: "aliguddu855@gmail.com",
     bloodType: "O+ve",
+    bloodQty: "500 ml",
   },
   {
     id: 3,
@@ -77,6 +84,7 @@ const rows = [
     contact: "03003437182",
     email: "aliguddu855@gmail.com",
     bloodType: "O+ve",
+    bloodQty: "500 ml",
   },
   {
     id: 4,
@@ -84,6 +92,7 @@ const rows = [
     contact: "03003437182",
     email: "aliguddu855@gmail.com",
     bloodType: "O+ve",
+    bloodQty: "500 ml",
   },
 ];
 

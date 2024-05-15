@@ -8,6 +8,7 @@ import BLOOD_GROUPS from "../../_mock/blood-groups.json";
 import FormTelNumberInput from "../../components/Forms/FormTelNumberInput";
 import FormTextArea from "../../components/Forms/FormTextArea";
 import { useParams } from "react-router-dom";
+import FormNumberInput from "../../components/Forms/FormNumberInput";
 
 function EditDonor() {
   const params = useParams();
@@ -24,6 +25,9 @@ function EditDonor() {
         </FormContainer>
         <FormContainer title={"Blood Group"}>
           <FormDropDown name={"bloodGroup"} options={BLOOD_GROUPS} />
+        </FormContainer>
+        <FormContainer title={"Qty"}>
+          <FormNumberInput name={"qty"} />
         </FormContainer>
         <FormContainer title={"Contact Number"}>
           <FormTelNumberInput name={"contactNumber"} />

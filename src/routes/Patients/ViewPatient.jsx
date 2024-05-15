@@ -17,6 +17,9 @@ function ViewPatient() {
       <FormContainer title={"Blood Group"}>
         <FormText>Blood Group Type Here</FormText>
       </FormContainer>
+      <FormContainer title={"Blood Qty"}>
+        <FormText>Blood Qty Type Here</FormText>
+      </FormContainer>
       <FormContainer title={"Contact Number"}>
         <FormText>Patient Contact Here</FormText>
       </FormContainer>
