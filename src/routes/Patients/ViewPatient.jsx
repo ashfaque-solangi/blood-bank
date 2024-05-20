@@ -1,33 +1,60 @@
+import { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import FormContainer from "../../components/Forms/FormContainer";
 import FormText from "../../components/Forms/FormText";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { getRequest } from "../../utils/server-request";
+import Breadcrumbs from "../../components/Common/Breadcrumbs";
+
+const BREADCRUMBS_OPTIONS = [
+  { title: "Patients", href: "/donors" },
+  { title: "View Patient", href: "#" },
+];
 
 function ViewPatient() {
   const params = useParams();
-  console.log(params);
+
+  const [patient, setPatient] = useState({});
+
+  const getPatient = async () => {
+    try {
+      await getRequest(`patients/${params.id}`, (res) => {
+        toast.success(res.message);
+        setPatient(res.data);
+      });
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getPatient();
+  }, [params.id]);
+
   return (
     <Box>
-      <Typography variant="h6" mb={2}>
-        View Patient {params.id}
+      <Breadcrumbs options={BREADCRUMBS_OPTIONS} />
+      <Typography variant="h6" mb={2} mt={2}>
+        View Patient
       </Typography>
       <FormContainer title={"Patient Name"}>
-        <FormText>Patient Name Here</FormText>
+        <FormText>{patient?.patient_name}</FormText>
       </FormContainer>
       <FormContainer title={"Blood Group"}>
-        <FormText>Blood Group Type Here</FormText>
+        <FormText>{patient?.patient_blood_type}</FormText>
       </FormContainer>
       <FormContainer title={"Blood Qty"}>
-        <FormText>Blood Qty Type Here</FormText>
+        <FormText>{patient?.patient_blood_qty}</FormText>
       </FormContainer>
       <FormContainer title={"Contact Number"}>
-        <FormText>Patient Contact Here</FormText>
+        <FormText>{patient?.patient_contact}</FormText>
       </FormContainer>
       <FormContainer title={"Email"}>
-        <FormText>Patient Email Here</FormText>
+        <FormText>{patient?.patient_email}</FormText>
       </FormContainer>
       <FormContainer title={"Description"}>
-        <FormText>Patient Decription Here</FormText>
+        <FormText>{patient?.patient_description}</FormText>
       </FormContainer>
     </Box>
   );

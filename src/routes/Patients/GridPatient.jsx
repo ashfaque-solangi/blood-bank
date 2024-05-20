@@ -1,38 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GridTable from "../../components/GridTable/GridTable";
 import { Box, Button, IconButton, Paper } from "@mui/material";
 import { RiEditFill } from "react-icons/ri";
 import { MdVisibility } from "react-icons/md";
 import { Link } from "react-router-dom";
 
+import Breadcrumbs from "../../components/Common/Breadcrumbs";
+import { getRequest } from "../../utils/server-request";
+import { toast } from "react-toastify";
+
+const BREADCRUMBS_OPTIONS = [{ title: "Patient", href: "/patients" }];
+
 const columns = [
   {
-    field: "id",
+    field: "patient_id",
     headerName: "ID",
     flex: 1,
   },
   {
-    field: "donorName",
+    field: "patient_name",
     headerName: "Donor Name",
     flex: 1,
   },
   {
-    field: "contact",
+    field: "patient_contact",
     headerName: "Contact",
     flex: 1,
   },
   {
-    field: "email",
+    field: "patient_email",
     headerName: "Email",
     flex: 1,
   },
   {
-    field: "bloodType",
+    field: "patient_blood_type",
     headerName: "Blood Type",
     flex: 1,
   },
   {
-    field: "bloodQty",
+    field: "patient_blood_qty",
     headerName: "Blood Qty",
     flex: 1,
   },
@@ -48,63 +54,50 @@ const columns = [
         gap={1}
         height={"100%"}
       >
-        {/* <RiEditFill /> */}
-        <IconButton LinkComponent={Link} to={`/patients/edit/${row.id}`}>
+        <IconButton
+          LinkComponent={Link}
+          to={`/patients/edit/${row.patient_id}`}
+        >
           <RiEditFill />
         </IconButton>
-        <IconButton LinkComponent={Link} to={`/patients/view/${row.id}`}>
+        <IconButton
+          LinkComponent={Link}
+          to={`/patients/view/${row.patient_id}`}
+        >
           <MdVisibility />
         </IconButton>
-        {/* <MdVisibility /> */}
       </Box>
     ),
   },
 ];
 
-const rows = [
-  {
-    id: 1,
-    donorName: "Ashfaque",
-    contact: "03003437182",
-    email: "aliguddu855@gmail.com",
-    bloodType: "O+ve",
-    bloodQty: "500 ml",
-  },
-  {
-    id: 2,
-    donorName: "Ashfaque",
-    contact: "03003437182",
-    email: "aliguddu855@gmail.com",
-    bloodType: "O+ve",
-    bloodQty: "500 ml",
-  },
-  {
-    id: 3,
-    donorName: "Ashfaque",
-    contact: "03003437182",
-    email: "aliguddu855@gmail.com",
-    bloodType: "O+ve",
-    bloodQty: "500 ml",
-  },
-  {
-    id: 4,
-    donorName: "Ashfaque",
-    contact: "03003437182",
-    email: "aliguddu855@gmail.com",
-    bloodType: "O+ve",
-    bloodQty: "500 ml",
-  },
-];
-
 const GridPatient = () => {
+  const [patients, setPatients] = useState([]);
+
+  const fetchPatients = async () => {
+    try {
+      await getRequest("patients", (res) => {
+        toast.success(res.message);
+        setPatients(res.data);
+      });
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchPatients();
+  }, []);
+
   return (
     <>
+      <Breadcrumbs options={BREADCRUMBS_OPTIONS} />
       <Box display={"flex"} justifyContent={"flex-end"} mb={2}>
         <Button variant="contained" LinkComponent={Link} to="/patients/add">
           Add New Patient
         </Button>
       </Box>
-      <GridTable columns={columns} rows={rows} />
+      <GridTable id="patient_id" columns={columns} rows={patients} />
     </>
   );
 };

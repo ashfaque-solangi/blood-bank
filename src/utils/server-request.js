@@ -1,20 +1,34 @@
 import axios from "axios";
 const HOST_URL = "http://localhost:4000";
 
-const postRequest = async (endpoint, params, success, error) => {
-  await axios
-    .post(`${HOST_URL}/${endpoint}`, params)
-    .then((res) => res.data)
-    .then(success)
-    .catch(error);
-};
-
-const getRequest = async (endpoint, success, error) => {
+const getRequest = async (endpoint, success) => {
   await axios
     .get(`${HOST_URL}/${endpoint}`)
     .then((res) => res.data)
     .then(success)
-    .catch(error);
+    .catch((err) => {
+      throw new Error(err.response.data.message);
+    });
 };
 
-export { postRequest, getRequest };
+const postRequest = async (endpoint, params, success) => {
+  await axios
+    .post(`${HOST_URL}/${endpoint}`, params)
+    .then((res) => res.data)
+    .then(success)
+    .catch((err) => {
+      throw new Error(err.response.data.message);
+    });
+};
+
+const updateRequest = async (endpoint, params, success) => {
+  await axios
+    .put(`${HOST_URL}/${endpoint}`, params)
+    .then((res) => res.data)
+    .then(success)
+    .catch((err) => {
+      throw new Error(err.response.data.message);
+    });
+};
+
+export { getRequest, postRequest, updateRequest };

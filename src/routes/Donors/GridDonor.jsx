@@ -4,8 +4,12 @@ import { Box, Button, IconButton, Paper } from "@mui/material";
 import { RiEditFill } from "react-icons/ri";
 import { MdVisibility } from "react-icons/md";
 import { Link } from "react-router-dom";
+import Breadcrumbs from "../../components/Common/Breadcrumbs";
 
 import { getRequest } from "../../utils/server-request";
+import { toast } from "react-toastify";
+
+const BREADCRUMBS_OPTIONS = [{ title: "Donors", href: "/donors" }];
 
 const columns = [
   {
@@ -61,48 +65,18 @@ const columns = [
   },
 ];
 
-// const rows = [
-//   {
-//     id: 1,
-//     donorName: "Ashfaque",
-//     contact: "03003437182",
-//     email: "aliguddu855@gmail.com",
-//     bloodType: "O+ve",
-//     bloodQty: "500 ml",
-//   },
-//   {
-//     id: 2,
-//     donorName: "Ashfaque",
-//     contact: "03003437182",
-//     email: "aliguddu855@gmail.com",
-//     bloodType: "O+ve",
-//     bloodQty: "500 ml",
-//   },
-//   {
-//     id: 3,
-//     donorName: "Ashfaque",
-//     contact: "03003437182",
-//     email: "aliguddu855@gmail.com",
-//     bloodType: "O+ve",
-//     bloodQty: "500 ml",
-//   },
-//   {
-//     id: 4,
-//     donorName: "Ashfaque",
-//     contact: "03003437182",
-//     email: "aliguddu855@gmail.com",
-//     bloodType: "O+ve",
-//     bloodQty: "500 ml",
-//   },
-// ];
-
 const GridDonor = () => {
   const [donors, setDonors] = useState([]);
 
   const fetchDonors = async () => {
-    await getRequest("donors", (res) => {
-      setDonors(res);
-    });
+    try {
+      await getRequest("donors", (res) => {
+        toast.success(res.message);
+        setDonors(res.data);
+      });
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   useEffect(() => {
@@ -111,6 +85,7 @@ const GridDonor = () => {
 
   return (
     <>
+      <Breadcrumbs options={BREADCRUMBS_OPTIONS} />
       <Box display={"flex"} justifyContent={"flex-end"} mb={2}>
         <Button variant="contained" LinkComponent={Link} to="/donors/add">
           Add New Donor
