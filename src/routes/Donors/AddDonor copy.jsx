@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FormContainer from "../../components/Forms/FormContainer";
 import FormTextInput from "../../components/Forms/FormTextInput";
 import FormEmailInput from "../../components/Forms/FormEmailInput";
@@ -7,36 +8,19 @@ import FormDropDown from "../../components/Forms/FormDropDown";
 import BLOOD_GROUPS from "../../_mock/blood-groups.json";
 import FormTelNumberInput from "../../components/Forms/FormTelNumberInput";
 import FormTextArea from "../../components/Forms/FormTextArea";
-import { useNavigate, useParams } from "react-router-dom";
 import FormNumberInput from "../../components/Forms/FormNumberInput";
-import { getRequest, updateRequest } from "../../utils/server-request";
-import { toast } from "react-toastify";
 import Breadcrumbs from "../../components/Common/Breadcrumbs";
+import { postRequest } from "../../utils/server-request";
+import { toast } from "react-toastify";
 
 const BREADCRUMBS_OPTIONS = [
-  { title: "Patients", href: "/patients" },
-  { title: "Edit Patient", href: "#" },
+  { title: "Donors", href: "/donors" },
+  { title: "Add Donors", href: "#" },
 ];
 
-function EditPatient() {
-  const params = useParams();
+function AddDonor() {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({});
-
-  const getPatient = async () => {
-    try {
-      await getRequest(`patients/${params.id}`, (res) => {
-        toast.success(res.message);
-        setInputs(res.data);
-      });
-    } catch (err) {
-      toast.error(err.message);
-    }
-  };
-
-  useEffect(() => {
-    getPatient();
-  }, [params.id]);
 
   const handlerInputs = (e) => {
     const { name, value } = e.target;
@@ -48,79 +32,87 @@ function EditPatient() {
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
-    console.log("abc");
+
     try {
-      await updateRequest(`patients/${params.id}`, inputs, (res) => {
+      await postRequest("donors", inputs, (res) => {
         toast.success(res.message);
-        navigate(`/patients/view/${res.data.id}`);
+        console.log("res", res.data);
+        navigate(`/donors/view/${res.data}`);
       });
     } catch (err) {
       toast.error(err.message);
     }
   };
 
+  const handlerReset = () => {
+    setInputs({});
+  };
+
   return (
     <Box>
       <Breadcrumbs options={BREADCRUMBS_OPTIONS} />
       <Typography variant="h6" mb={2} mt={2}>
-        Edit Patient
+        Add New Donor
       </Typography>
       <form onSubmit={handlerSubmit}>
-        <FormContainer title={"Patient Name"}>
+        <FormContainer title={"Donor Name"}>
           <FormTextInput
-            name={"patient_name"}
-            placeholder="Enter Patient Name"
-            value={inputs.patient_name || ""}
+            name={"donor_name"}
+            placeholder="Enter Donor Name"
+            value={inputs.donor_name || ""}
             onChange={handlerInputs}
           />
         </FormContainer>
         <FormContainer title={"Age"}>
           <FormNumberInput
-            name={"patient_age"}
-            value={inputs.patient_age || ""}
+            name={"donor_age"}
+            value={inputs.donor_age || ""}
             onChange={handlerInputs}
           />
         </FormContainer>
         <FormContainer title={"Blood Group"}>
           <FormDropDown
-            name={"patient_blood_type"}
+            name={"donor_blood_type"}
             options={BLOOD_GROUPS}
-            value={inputs.patient_blood_type || ""}
+            value={inputs.donor_blood_type || ""}
             onChange={handlerInputs}
           />
         </FormContainer>
-        <FormContainer title={"Qty"}>
+        <FormContainer title={"Blood Qty"}>
           <FormNumberInput
-            name={"patient_blood_qty"}
-            value={inputs.patient_blood_qty || ""}
+            name={"donor_blood_qty"}
+            value={inputs.donor_blood_qty || ""}
             onChange={handlerInputs}
           />
         </FormContainer>
         <FormContainer title={"Contact Number"}>
           <FormTelNumberInput
-            name={"patient_contact"}
-            value={inputs.patient_contact || ""}
+            name={"donor_contact"}
+            value={inputs.donor_contact || ""}
             onChange={handlerInputs}
           />
         </FormContainer>
         <FormContainer title={"Email"}>
           <FormEmailInput
-            name={"patient_email"}
-            placeholder="Enter Patient Email"
-            value={inputs.patient_email || ""}
+            name={"donor_email"}
+            placeholder="Enter Donor Email"
+            value={inputs.donor_email || ""}
             onChange={handlerInputs}
           />
         </FormContainer>
         <FormContainer title={"Address"}>
           <FormTextArea
-            name={"patient_description"}
-            value={inputs.patient_description || ""}
+            name={"donor_description"}
+            value={inputs.donor_description || ""}
             onChange={handlerInputs}
           />
         </FormContainer>
         <Box gap={1} display={"flex"} justifyContent={"center"} mb={2}>
           <Button variant="contained" type="submit">
-            Update Patient
+            Add Donor
+          </Button>
+          <Button variant="contained" color="error" onClick={handlerReset}>
+            Reset
           </Button>
         </Box>
       </form>
@@ -128,4 +120,4 @@ function EditPatient() {
   );
 }
 
-export default EditPatient;
+export default AddDonor;

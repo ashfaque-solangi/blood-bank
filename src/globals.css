@@ -12,3 +12,14 @@ body {
 a {
   text-decoration: none;
 }
+
+.table-column-padding {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-column-padding tr td,
+.table-column-padding tr th {
+  padding: 0.5rem;
+}

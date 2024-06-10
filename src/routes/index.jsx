@@ -6,7 +6,7 @@ import {
   ViewBloodGroup,
 } from "./BloodGroup";
 import Dashboard from "./Dashboard";
-import { AddDonor, GridDonor, ViewDonor } from "./Donors";
+import { AddDonor, GridDonor, ViewDonor, DonorInfo } from "./Donors";
 import { AddPatient, EditPatient, GridPatient, ViewPatient } from "./Patients";
 import EditDonor from "./Donors/EditDonor";
 
@@ -76,6 +76,10 @@ const Routes = () => {
         {
           path: "view/:id",
           element: <ViewDonor />,
+        },
+        {
+          path: "donor-info/:id",
+          element: <DonorInfo />,
         },
       ],
     },

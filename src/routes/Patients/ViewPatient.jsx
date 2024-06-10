@@ -41,6 +41,9 @@ function ViewPatient() {
       <FormContainer title={"Patient Name"}>
         <FormText>{patient?.patient_name}</FormText>
       </FormContainer>
+      <FormContainer title={"Age"}>
+        <FormText>{patient?.patient_age}</FormText>
+      </FormContainer>
       <FormContainer title={"Blood Group"}>
         <FormText>{patient?.patient_blood_type}</FormText>
       </FormContainer>
@@ -53,7 +56,7 @@ function ViewPatient() {
       <FormContainer title={"Email"}>
         <FormText>{patient?.patient_email}</FormText>
       </FormContainer>
-      <FormContainer title={"Description"}>
+      <FormContainer title={"Address"}>
         <FormText>{patient?.patient_description}</FormText>
       </FormContainer>
     </Box>

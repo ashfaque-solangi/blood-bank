@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, RadioGroup, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormContainer from "../../components/Forms/FormContainer";
@@ -9,6 +9,7 @@ import BLOOD_GROUPS from "../../_mock/blood-groups.json";
 import FormTelNumberInput from "../../components/Forms/FormTelNumberInput";
 import FormTextArea from "../../components/Forms/FormTextArea";
 import FormNumberInput from "../../components/Forms/FormNumberInput";
+import FormRadioInput from "../../components/Forms/FormRadioInput";
 import Breadcrumbs from "../../components/Common/Breadcrumbs";
 import { postRequest } from "../../utils/server-request";
 import { toast } from "react-toastify";
@@ -33,11 +34,13 @@ function AddDonor() {
   const handlerSubmit = async (e) => {
     e.preventDefault();
 
+    // navigate(`/donors/donor-info/`);
+    console.log("inputs", inputs);
     try {
       await postRequest("donors", inputs, (res) => {
         toast.success(res.message);
-        console.log("res", res.data);
-        navigate(`/donors/view/${res.data}`);
+        // console.log("res", res.data);
+        navigate(`/donors/donor-info/${res.data.id}`);
       });
     } catch (err) {
       toast.error(err.message);
@@ -59,16 +62,52 @@ function AddDonor() {
           <FormTextInput
             name={"donor_name"}
             placeholder="Enter Donor Name"
-            // value={inputs?.donorName}
             value={inputs.donor_name || ""}
             onChange={handlerInputs}
           />
+        </FormContainer>
+        <FormContainer title={"Age"}>
+          <FormNumberInput
+            name={"donor_age"}
+            value={inputs.donor_age || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
+        <FormContainer title={"Gender"}>
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+          >
+            <FormRadioInput
+              name={"donor_gender"}
+              // value={inputs.donor_gender || ""}
+              onChange={handlerInputs}
+              value={"male"}
+              label={"Male"}
+              checked={inputs.donor_gender === "male"}
+            />
+            <FormRadioInput
+              name={"donor_gender"}
+              // value={inputs.donor_gender || ""}
+              onChange={handlerInputs}
+              value={"female"}
+              label={"Female"}
+              checked={inputs.donor_gender === "female"}
+            />
+            <FormRadioInput
+              name={"donor_gender"}
+              onChange={handlerInputs}
+              value={"others"}
+              label={"Others"}
+              checked={inputs.donor_gender === "others"}
+            />
+          </RadioGroup>
         </FormContainer>
         <FormContainer title={"Blood Group"}>
           <FormDropDown
             name={"donor_blood_type"}
             options={BLOOD_GROUPS}
-            // value={inputs?.bloodGroup}
             value={inputs.donor_blood_type || ""}
             onChange={handlerInputs}
           />
@@ -76,7 +115,6 @@ function AddDonor() {
         <FormContainer title={"Blood Qty"}>
           <FormNumberInput
             name={"donor_blood_qty"}
-            // value={inputs?.qty}
             value={inputs.donor_blood_qty || ""}
             onChange={handlerInputs}
           />
@@ -96,10 +134,46 @@ function AddDonor() {
             onChange={handlerInputs}
           />
         </FormContainer>
-        <FormContainer title={"Description"}>
+        <FormContainer title={"Address"}>
           <FormTextArea
             name={"donor_description"}
             value={inputs.donor_description || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
+        <FormContainer title={"Weight"}>
+          <FormNumberInput
+            name={"donor_weight"}
+            value={inputs.donor_weight || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
+        <FormContainer title={"Temp:"}>
+          <FormNumberInput
+            name={"donor_temprature"}
+            value={inputs.donor_temprature || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
+        <FormContainer title={"B.P."}>
+          <FormNumberInput
+            name={"donor_b_p"}
+            value={inputs.donor_b_p || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
+        <FormContainer title={"Pulse"}>
+          <FormNumberInput
+            name={"donor_pulse"}
+            value={inputs.donor_pulse || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
+        <FormContainer title={"Blood Technician"}>
+          <FormTextInput
+            name={"blood_technician"}
+            placeholder="Blood Technician Name"
+            value={inputs.blood_technician || ""}
             onChange={handlerInputs}
           />
         </FormContainer>

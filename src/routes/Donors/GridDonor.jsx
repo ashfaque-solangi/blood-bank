@@ -23,6 +23,11 @@ const columns = [
     flex: 1,
   },
   {
+    field: "donor_age",
+    headerName: "Donor Age",
+    flex: 1,
+  },
+  {
     field: "donor_contact",
     headerName: "Contact",
     flex: 1,

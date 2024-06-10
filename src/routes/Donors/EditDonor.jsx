@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, RadioGroup, Typography } from "@mui/material";
 import React from "react";
 import FormContainer from "../../components/Forms/FormContainer";
 import FormTextInput from "../../components/Forms/FormTextInput";
@@ -14,6 +14,7 @@ import { getRequest, updateRequest } from "../../utils/server-request";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Breadcrumbs from "../../components/Common/Breadcrumbs";
+import FormRadioInput from "../../components/Forms/FormRadioInput";
 
 const BREADCRUMBS_OPTIONS = [
   { title: "Donors", href: "/donors" },
@@ -76,6 +77,44 @@ function EditDonor() {
             onChange={handlerInputs}
           />
         </FormContainer>
+        <FormContainer title={"Age"}>
+          <FormNumberInput
+            name={"donor_age"}
+            value={inputs.donor_age || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
+        <FormContainer title={"Gender"}>
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+          >
+            <FormRadioInput
+              name={"donor_gender"}
+              // value={inputs.donor_gender || ""}
+              onChange={handlerInputs}
+              value={"male"}
+              label={"Male"}
+              checked={inputs.donor_gender === "male"}
+            />
+            <FormRadioInput
+              name={"donor_gender"}
+              // value={inputs.donor_gender || ""}
+              onChange={handlerInputs}
+              value={"female"}
+              label={"Female"}
+              checked={inputs.donor_gender === "female"}
+            />
+            <FormRadioInput
+              name={"donor_gender"}
+              onChange={handlerInputs}
+              value={"others"}
+              label={"Others"}
+              checked={inputs.donor_gender === "others"}
+            />
+          </RadioGroup>
+        </FormContainer>
         <FormContainer title={"Blood Group"}>
           <FormDropDown
             name={"donor_blood_type"}
@@ -106,10 +145,46 @@ function EditDonor() {
             onChange={handlerInputs}
           />
         </FormContainer>
-        <FormContainer title={"Description"}>
+        <FormContainer title={"Address"}>
           <FormTextArea
             name={"donor_description"}
             value={inputs.donor_description || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
+        <FormContainer title={"Weight"}>
+          <FormNumberInput
+            name={"donor_weight"}
+            value={inputs.donor_weight || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
+        <FormContainer title={"Temp:"}>
+          <FormNumberInput
+            name={"donor_temprature"}
+            value={inputs.donor_temprature || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
+        <FormContainer title={"B.P."}>
+          <FormNumberInput
+            name={"donor_b_p"}
+            value={inputs.donor_b_p || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
+        <FormContainer title={"Pulse"}>
+          <FormNumberInput
+            name={"donor_pulse"}
+            value={inputs.donor_pulse || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
+        <FormContainer title={"Blood Technician"}>
+          <FormTextInput
+            name={"blood_technician"}
+            placeholder="Blood Technician Name"
+            value={inputs.blood_technician || ""}
             onChange={handlerInputs}
           />
         </FormContainer>

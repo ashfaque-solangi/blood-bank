@@ -59,6 +59,13 @@ function AddPatient() {
             onChange={handlerInputs}
           />
         </FormContainer>
+        <FormContainer title={"Age"}>
+          <FormNumberInput
+            name={"patient_age"}
+            value={inputs.patient_age || ""}
+            onChange={handlerInputs}
+          />
+        </FormContainer>
         <FormContainer title={"Blood Group"}>
           <FormDropDown
             name={"patient_blood_type"}
@@ -89,7 +96,7 @@ function AddPatient() {
             onChange={handlerInputs}
           />
         </FormContainer>
-        <FormContainer title={"Description"}>
+        <FormContainer title={"Address"}>
           <FormTextArea
             name={"patient_description"}
             value={inputs.patient_description || ""}

@@ -7,7 +7,7 @@ function FormTextArea(props) {
       fullWidth
       size="small"
       multiline
-      minRows={3}
+      minRows={2}
       {...props}
     />
   );

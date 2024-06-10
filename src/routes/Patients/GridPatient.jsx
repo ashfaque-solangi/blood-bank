@@ -23,6 +23,11 @@ const columns = [
     flex: 1,
   },
   {
+    field: "patient_age",
+    headerName: "Patient Age",
+    flex: 1,
+  },
+  {
     field: "patient_contact",
     headerName: "Contact",
     flex: 1,
